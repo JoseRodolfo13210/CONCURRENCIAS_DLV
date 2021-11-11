@@ -1,0 +1,268 @@
+fluents:
+
+%Ensamble
+    FASES(N) requires #int(N).
+
+%Stock de Materiales    
+    Gabinete(G) requires #int(G).
+    TarjetaMadre(TM) requires #int(TM).
+    Tornillos(T) requires #int(T).
+    Procesador(P) requires #int(P).
+    PastaTermica(PT) requires #int(PT).
+    Ventilador(V) requires #int(V).
+    Ram(R) requires #int(R).
+    FuentePoder(FP) requires #int(FP).
+    Enfriamiento(E) requires #int(E).
+    DiscoDuro(DD) requires #int(DD).
+    DiscoSolido(DS) requires #int(DS).
+    LectorDVD(LD) requires #int(LD).
+    LectorMemoria(LM) requires #int(LM).
+    TarjetaGrafica(TG) requires #int(TG).
+    Adaptador(A) requires #int(A).
+    Mouse(M) requires #int(M).
+    Teclado(TE) requires #int(TE).
+    Impresora(I) requires #int(I).
+    Microfono(M) requires #int(M).
+    
+
+ 
+
+%Fluentes 
+    GabineteAbierto. 
+    TarjetaMColocada.   
+    TronillosColocados.  
+    ProcesadorColocado.  
+    RamColocada.
+    FuentePColocada.           
+    EnfriamientoColocado.
+    UnidadesLectorasColocadas. 
+    TarjetaGColocada.   
+    AdaptadorColocado.
+    GabineteCerrado.
+    PerifericosConectados.
+    Ensamble(E) requires #int(E).
+
+actions:
+    AbrirGabinete.
+    ColocarTarjetaMadre.
+    ColocarTornillos1.
+    ColocarTornillos2.
+    ColocarTornillos3.
+    ColocarTornillos4.
+    ColocarProcesador.
+    ColocarPastaTermica.
+    ColocarVentilador1.
+    ColocarVentilador2.
+    ColocarRam.
+    ColocarFuentePoder.
+    ColocarEnfriamiento.
+    ColocarDiscoDuro.
+    ColocarDiscoSolido.
+    ColocarLectorDVD.
+    ColocarLectorMemoria.
+    ColocarTarjetaGrafica.
+    ColocarAdaptador.
+    CerrarGabinete.
+    ConectarMouse.
+    ConectarTeclado.
+    ConectarImpresora.
+    ConectarMicrofono.
+    VerificarEnsamble.
+
+always:
+    executable AbrirGabinete if Gabinete(CON), CON>=1, FASES(0).
+    caused Gabinete(New) if Old=New+1 after AbrirGabinete, Gabinete(Old).
+    caused -Gabinete(Old) after AbrirGabinete, Gabinete(Old).
+    caused FASES(1) after AbrirGabinete.
+    caused GabineteAbierto after AbrirGabinete.
+
+
+    executable ColocarTarjetaMadre if TarjetaMadre(CON), CON>=0, FASES(1).
+    caused TarjetaMadre(New) if Old=New+1 after ColocarTarjetaMadre, TarjetaMadre(Old).
+    caused -TarjetaMadre(Old) after ColocarTarjetaMadre, TarjetaMadre(Old).
+    caused FASES(2) after ColocarTarjetaMadre.
+    caused TarjetaMColocada after ColocarTarjetaMadre.
+
+    executable ColocarTornillos1 if Tornillos(CON), CON>=0, FASES(2).
+    caused Tornillos(New) if Old=New+1 after ColocarTornillos, Tornillos(Old).
+    caused -Tornillos(Old) after ColocarTornillos1, Tornillos(Old).
+    caused FASES(3) after ColocarTornillos1.
+    caused TronillosColocados after ColocarTornillos1.
+
+    executable ColocarTornillos2 if Tornillos(CON), CON>=0, FASES(2).
+    caused Tornillos(New) if Old=New+1 after ColocarTornillos2, Tornillos(Old).
+    caused -Tornillos(Old) after ColocarTornillos2, Tornillos(Old).
+    caused FASES(3) after ColocarTornillos2.
+    caused TronillosColocados after ColocarTornillos2.
+
+    executable ColocarTornillos3 if Tornillos(CON), CON>=0, FASES(2).
+    caused Tornillos(New) if Old=New+1 after ColocarTornillos3, Tornillos(Old).
+    caused -Tornillos(Old) after ColocarTornillos3, Tornillos(Old).
+    caused FASES(3) after ColocarTornillos3.
+    caused TronillosColocados after ColocarTornillos3.
+
+    executable ColocarTornillos4 if Tornillos(CON), CON>=0, FASES(2).
+    caused Tornillos(New) if Old=New+1 after ColocarTornillos4, Tornillos(Old).
+    caused -Tornillos(Old) after ColocarTornillos4, Tornillos(Old).
+    caused FASES(3) after ColocarTornillos4.
+    caused TronillosColocados after ColocarTornillos4.
+
+    executable ColocarProcesador if Procesador(CON), CON>=0, FASES(3).
+    caused Procesador(New) if Old=New+1 after ColocarProcesador, Procesador(Old).
+    caused -Procesador(Old) after ColocarProcesador, Procesador(Old).
+    caused FASES(4) after ColocarProcesador.
+    caused ProcesadorColocado after ColocarProcesador.
+
+    executable ColocarPastaTermica if PastaTermica(CON), CON>=0, FASES(3).
+    caused PastaTermica(New) if Old=New+1 after ColocarPastaTermica, PastaTermica(Old).
+    caused -PastaTermica(Old) after ColocarPastaTermica, PastaTermica(Old).
+    caused FASES(4) after ColocarPastaTermica.
+    caused ProcesadorColocado after ColocarPastaTermica.
+
+    executable ColocarVentilador1 if Ventilador(CON), CON>=0, FASES(3).
+    caused Ventilador(New) if Old=New+1 after ColocarVentilador1, Ventilador(Old).
+    caused -Ventilador(Old) after ColocarVentilador1, Ventilador(Old).
+    caused FASES(4) after ColocarVentilador1.
+    caused ProcesadorColocado after ColocarVentilador1.
+
+    executable ColocarVentilador2 if Ventilador(CON), CON>=0, FASES(3).
+    caused Ventilador(New) if Old=New+1 after ColocarVentilador2, Ventilador(Old).
+    caused -Ventilador(Old) after ColocarVentilador2, Ventilador(Old).
+    caused FASES(4) after ColocarVentilador2.
+    caused ProcesadorColocado after ColocarVentilador2.
+
+    executable ColocarRam if Ram(CON), CON>=0, FASES(4).
+    caused Ram(New) if Old=New+1 after ColocarRam, Ram(Old).
+    caused -Ram(Old) after ColocarRam, Ram(Old).
+    caused FASES(5) after ColocarRam.
+    caused RamColocada after ColocarRam.
+
+    executable ColocarFuentePoder if FuentePoder(CON), CON>=0, FASES(5).
+    caused FuentePoder(New) if Old=New+1 after ColocarFuentePoder, FuentePoder(Old).
+    caused -FuentePoder(Old) after ColocarFuentePoder, FuentePoder(Old).
+    caused FASES(6) after ColocarFuentePoder.
+    caused FuentePColocada after ColocarFuentePoder.
+
+    executable ColocarEnfriamiento if Enfriamiento(CON), CON>=0, FASES(6).
+    caused Enfriamiento(New) if Old=New+1 after ColocarEnfriamiento, Enfriamiento(Old).
+    caused -Enfriamiento(Old) after ColocarEnfriamiento, Enfriamiento(Old).
+    caused FASES(7) after ColocarEnfriamiento.
+    caused EnfriamientoColocado after ColocarEnfriamiento.
+
+    executable ColocarDiscoDuro if DiscoDuro(CON), CON>=0, FASES(7).
+    caused DiscoDuro(New) if Old=New+1 after ColocarDiscoDuro, DiscoDuro(Old).
+    caused -DiscoDuro(Old) after ColocarDiscoDuro, DiscoDuro(Old).
+    caused FASES(8) after ColocarDiscoDuro.
+    caused UnidadesLectorasColocadas after ColocarDiscoDuro.
+
+    executable ColocarDiscoSolido if DiscoSolido(CON), CON>=0, FASES(7).
+    caused DiscoSolido(New) if Old=New+1 after ColocarDiscoSolido, DiscoSolido(Old).
+    caused -DiscoSolido(Old) after ColocarDiscoSolido, DiscoSolido(Old).
+    caused FASES(8) after ColocarDiscoSolido.
+    caused UnidadesLectorasColocadas after ColocarDiscoSolido.
+
+    executable ColocarLectorDVD if LectorDVD(CON), CON>=0, FASES(7).
+    caused LectorDVD(New) if Old=New+1 after ColocarLectorDVD, LectorDVD(Old).
+    caused -LectorDVD(Old) after ColocarLectorDVD, LectorDVD(Old).
+    caused FASES(8) after ColocarLectorDVD.
+    caused UnidadesLectorasColocadas after ColocarLectorDVD.
+
+    executable ColocarLectorMemoria if LectorMemoria(CON), CON>=0, FASES(7).
+    caused LectorMemoria(New) if Old=New+1 after ColocarLectorMemoria, LectorMemoria(Old).
+    caused -LectorMemoria(Old) after ColocarLectorMemoria, LectorMemoria(Old).
+    caused FASES(8) after ColocarLectorMemoria.
+    caused UnidadesLectorasColocadas after ColocarLectorMemoria.
+
+    executable ColocarTarjetaGrafica if TarjetaGrafica(CON), CON>=0, FASES(8).
+    caused TarjetaGrafica(New) if Old=New+1 after ColocarTarjetaGrafica, TarjetaGrafica(Old).
+    caused -TarjetaGrafica(Old) after ColocarTarjetaGrafica, TarjetaGrafica(Old).
+    caused FASES(9) after ColocarTarjetaGrafica.
+    caused TarjetaGColocada after ColocarTarjetaGrafica.
+
+    executable ColocarAdaptador if Adaptador(CON), CON>=0, FASES(9).
+    caused Adaptador(New) if Old=New+1 after ColocarAdaptador, Adaptador(Old).
+    caused -Adaptador(Old) after ColocarAdaptador, Adaptador(Old).
+    caused FASES(10) after ColocarAdaptador.
+    caused AdaptadorColocado after ColocarAdaptador.
+
+    executable CerrarGabinete if Gabinete(CON), CON>=0, FASES(10).
+    caused Gabinete(New) if Old=New+1 after CerrarGabinete, Gabinete(Old).
+    caused -Gabinete(Old) after CerrarGabinete, Gabinete(Old).
+    caused FASES(11) after CerrarGabinete.
+    caused GabineteCerrado after CerrarGabinete.
+
+    executable ConectarMouse if Mouse(CON), CON>=0, FASES(11).
+    caused Mouse(New) if Old=New+1 after ConectarMouse, Mouse(Old).
+    caused -Mouse(Old) after ConectarMouse, Mouse(Old).
+    caused FASES(12) after ConectarMouse.
+    caused PerifericosConectados after ConectarMouse.
+
+    executable ConectarTeclado if Teclado(CON), CON>=0, FASES(11).
+    caused Teclado(New) if Old=New+1 after ConectarTeclado, Teclado(Old).
+    caused -Teclado(Old) after ConectarTeclado, Teclado(Old).
+    caused FASES(12) after ConectarTeclado.
+    caused PerifericosConectados after ConectarTeclado.
+
+    executable ConectarImpresora if Impresora(CON), CON>=0, FASES(11).
+    caused Impresora(New) if Old=New+1 after ConectarImpresora, Impresora(Old).
+    caused -Impresora(Old) after ConectarImpresora, Impresora(Old).
+    caused FASES(12) after ConectarImpresora.
+    caused PerifericosConectados after ConectarImpresora.
+
+    executable ConectarMicrofono if Microfono(CON), CON>=0, FASES(11).
+    caused Microfono(New) if Old=New+1 after ConectarMicrofono, Microfono(Old).
+    caused -Microfono(Old) after ConectarMicrofono, Microfono(Old).
+    caused FASES(12) after ConectarMicrofono.
+    caused PerifericosConectados after ConectarMicrofono.
+      
+
+%VerificarEnsamble
+
+    executable VerificarEnsamble if FASES(12).
+    caused Ensamble(New) if New=Old+1 after VerificarEnsamble, FASES(Old).
+    caused -Ensamble(Old) after VerificarEnsamble, Ensamble(Old).
+    caused FASES(13) after VerificarEnsamble.
+    inertial Gabinete(G).
+    inertial TarjetaMadre(TM). 
+    inertial Tornillos(T).
+    inertial Procesador(P).
+    inertial PastaTermica(PT). 
+    inertial Ventilador(V).
+    inertial Ram(R).
+    inertial FuentePoder(FP). 
+    inertial Enfriamiento(E).
+    inertial DiscoDuro(DD). 
+    inertial DiscoSolido(DS). 
+    inertial LectorDVD(LD). 
+    inertial LectorMemoria(LM). 
+    inertial TarjetaGrafica(TG). 
+    inertial Adaptador(A).
+    inertial Mouse(M).
+    inertial Teclado(TE). 
+    inertial Impresora(I).
+    inertial Microfono(M).
+    inertial Ensamble(E).
+
+initially:
+    Gabinete(1).
+    TarjetaMadre(1). 
+    Tornillos(4).
+    Procesador(1).
+    PastaTermica(1). 
+    Ventilador(2).
+    Ram(1).
+    FuentePoder(1). 
+    Enfriamiento(1).
+    DiscoDuro(1).
+    DiscoSolido(1). 
+    LectorDVD(1). 
+    LectorMemoria(1). 
+    TarjetaGrafica(1). 
+    Adaptador(1).
+    Mouse(1).
+    Teclado(1). 
+    Impresora(1).
+    Microfono(1).
+    Ensamble(1).
+    FASES(0).
+goal:FASES(13)? (13)
